@@ -35,6 +35,13 @@ def test_accidental_claim_with_six_excess_months():
     assert out_of_warranty_charge("standard", 30, "accidental", False) == 1200
 
 
+def test_defect_claim_with_more_than_twelve_excess_months():
+    assert out_of_warranty_charge("basic", 25, "defect", False) == 1950
+
+
+def test_accidental_claim_with_more_than_twelve_excess_months():
+    assert out_of_warranty_charge("basic", 25, "accidental", False) == 3575
+
 
 # -----------------------------------------
 # 2. CLAIM ALLOWED TEST CASES
@@ -54,6 +61,10 @@ def test_non_recall_claim_before_thirty_days_is_not_allowed():
 
 def test_non_recall_claim_after_thirty_days_at_limit_is_allowed():
     assert claim_allowed(30, 2, False) is True
+
+
+def test_non_recall_claim_after_thirty_days_above_limit_is_not_allowed():
+    assert claim_allowed(30, 3, False) is False
 
 
 # -----------------------------------------
