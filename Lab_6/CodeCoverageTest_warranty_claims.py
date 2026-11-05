@@ -1,4 +1,3 @@
-
 import pytest
 from warranty_claims import out_of_warranty_charge, claim_allowed, sla_status
 
@@ -27,6 +26,16 @@ def test_accidental_claim_more_than_twelve_months_out_of_warranty():
     assert out_of_warranty_charge("basic", 25, "accidental", False) == 3575
 
 
+def test_recall_claim_within_claim_limit_is_allowed():
+    assert claim_allowed(1, 5, True) is True
+
+
+def test_recent_non_recall_claim_is_not_allowed():
+    assert claim_allowed(29, 1, False) is False
+
+
+def test_non_recall_claim_after_waiting_period_is_allowed():
+    assert claim_allowed(30, 1, False) is True
 
 
 @pytest.mark.parametrize(
