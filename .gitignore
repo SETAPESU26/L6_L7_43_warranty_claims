@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.coverage
+htmlcov/
+code_coverage_screenshoot.html
+code_coverage_screenshoot_files/
